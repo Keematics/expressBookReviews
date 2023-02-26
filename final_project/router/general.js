@@ -5,6 +5,51 @@ let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
 const public_users = express.Router();
 
+//------------------------- ASYNC FUNCTIONS ----------------------
+const get_book_async = async () => {
+  try {
+    const response = await axios.get('http://localhost:5000')
+    console.log(response.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const get_books_details_by_isbn_async = async isbn => {
+  try {
+    const response = await axios.get(`http://localhost:5000/isbn/${isbn}`)
+    console.log(response.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const get_books_details_by_author_async = async author => {
+  try {
+    const response = await axios.get(`http://localhost:5000/author/${author}`)
+    console.log(response.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const get_books_details_by_title_async = async title => {
+  try {
+    const response = await axios.get(`http://localhost:5000/title/${title}`)
+    console.log(response.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+get_book_async();
+get_books_details_by_isbn_async(7);
+get_books_details_by_author_async("Chinua Achebe")
+get_books_details_by_title_async("Fairy tales")
+
+
+//--------ASYNC WITH AXIOS ENDS------------
+
 
 public_users.post("/register", (req, res) => {
   const { username, password } = req.body;
